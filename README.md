@@ -27,6 +27,15 @@ The default tags (and their times) are
 @morning (5am-10am)
 @evening (5pm-11pm)
 
-- Set up your agenda to use org-when-skip-entry-if and org-when-skip-subtree-if, instead of org-agenda-skip-entry-if and org-agenda-skip-subtree-if, respectively.
+- In your org agenda configuration, supply org-agenda-skip-function with org-when-skip-filter, or, if you use org-agenda-skip\*, use org-when-skip\* instead.
+e.g.
+
+(setq org-agenda-custom-commands
+        '(("d" "Daily agenda"
+            (agenda ""
+                ((org-agenda-files (list org-directory))
+                (org-agenda-span 3)
+                (org-agenda-skip-function '(org-when-skip-if 'todo 'done)))))))
+                      
 - tag your headings with one of the specified tags.
 
