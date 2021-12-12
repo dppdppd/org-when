@@ -20,10 +20,6 @@
 ;;
 ;;; Code:
 
-;; (defgroup org-when nil
-;;   "A time-based filter for org-agenda"
-;;   :group 'org)
-
 (defcustom org-when-list-tags
   `((6  "@weekend"      6       0)
    ( 2  "@evening"      17      23 )
@@ -82,6 +78,7 @@ END is the end of the time block as represented by decode-time e.g., 0 for Sunda
               (and (> cur-val end) (< cur-val start)))) ; or greater than end AND less than start
         (org-when-recursive-test (cdr when-list) alltags)))))
 
+
 (defun org-when-filter ( entries )
   ""
   (org-back-to-heading t)
@@ -105,6 +102,20 @@ END is the end of the time block as represented by decode-time e.g., 0 for Sunda
     (or
    (org-when-filter org-when-list-tags)
    (org-agenda-skip-subtree-if conditions)))
+
+(defun org-when-skip-filter ()
+  ""
+  (org-when-filter org-when-list-tags))
+
+;;------------------------------------------------------
+(defun org-when-pass-through (&rest conditions)
+  ""
+   (org-agenda-skip-entry-if conditions))
+
+(defun org-when-testthis ()
+  ""
+  (message "hi"))
+;;---------------------------------------------
 
 (provide 'org-when)
 ;;; org-when.el ends here
