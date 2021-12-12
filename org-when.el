@@ -107,15 +107,6 @@ END is the end of the time block as represented by decode-time e.g., 0 for Sunda
   ""
   (org-when-filter org-when-list-tags))
 
-;;------------------------------------------------------
-(defun org-when-pass-through (&rest conditions)
-  ""
-   (org-agenda-skip-entry-if conditions))
-
-(defun org-when-testthis ()
-  ""
-  (message "hi"))
-;;---------------------------------------------
 
 (provide 'org-when)
 ;;; org-when.el ends here
