@@ -7,7 +7,7 @@
 ;; Created: December 10, 2021
 ;; Modified: December 10, 2021
 ;; (insert (concat "\n;; version: " (format-time-string "%Y.%m%d.%H" (current-time))))
-;; version: 2021.1211.09
+;; version: 2021.1212.10
 ;; Keywords: time org agenda
 ;; Homepage: https://github.com/dppdppd/org-when
 ;; Package-Requires: ((emacs "27.1"))
