@@ -16,7 +16,7 @@ With org-when, this heading will only show up in org agenda on Saturday or Sunda
 
 ## CONFIGURATION
 
-1. OPTIONALLY, modify org-when-list-tags. This is a list of tags and times. It can be customized or set.
+1. OPTIONALLY, customize org-when-time-entries. This is a list of tags and times. It can be customized or set.
 The default tags (and their times) are
 
 @weekend (Sat-Sun)
