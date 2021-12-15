@@ -63,7 +63,7 @@ END is the end of the time block as represented by decode-time e.g., 0 for Sunda
 
 (defun org-when-recursive-test (when-list alltags)
   ""
-  (when when-list
+  (if when-list
     (let*
         ((entry (car when-list))
          (type (org-when-get-type entry))
@@ -71,12 +71,13 @@ END is the end of the time block as represented by decode-time e.g., 0 for Sunda
          (start (org-when-get-start entry))
          (end (org-when-get-end entry))
          (cur-val (nth type (decode-time))))
-      (or
-       (and (member tag alltags)
+      (and
+       (not (and (member tag alltags)
             (if (< start end) ; we need to flip the logic if e.g., sat-sun (6-0)
-                (or (< cur-val start) (> cur-val end)) ;less than start or greater than end
-              (and (> cur-val end) (< cur-val start)))) ; or greater than end AND less than start
-        (org-when-recursive-test (cdr when-list) alltags)))))
+                (and (> cur-val start) (< cur-val end)) ;less than start or greater than end
+              (or (< cur-val end) (> cur-val start))))) ; or greater than end AND less than start
+        (org-when-recursive-test (cdr when-list) alltags)))
+    t))
 
 
 (defun org-when-filter ( entries )
