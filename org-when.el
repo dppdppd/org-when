@@ -5,9 +5,9 @@
 ;; Author: Ido Magal <https://github.com/dppdppd>
 ;; Maintainer: Ido Magal <1166577+dppdppd@users.noreply.github.com>
 ;; Created: December 10, 2021
-;; Modified: December 10, 2021
+;; Modified: December 14, 2021
 ;; (insert (concat "\n;; version: " (format-time-string "%Y.%m%d.%H" (current-time))))
-;; version: 2021.1212.10
+;; version: 2021.1214.22
 ;; Keywords: time org agenda
 ;; Homepage: https://github.com/dppdppd/org-when
 ;; Package-Requires: ((emacs "27.1"))
