@@ -16,13 +16,13 @@ With org-when, this heading will only show up in org agenda on Saturday or Sunda
 
 ## CONFIGURATION
 
-1. OPTIONALLY, customize org-when-time-entries. This is a list of tags and times. It can be customized or set.
-The default tags (and their times) are
+1. optionally, customize org-when-time-entries. This is a list of tags and times. It can be customized or set.
+The default entries are
 
-@weekend (Sat-Sun)
-@weekday (Mon-Fr)
-@morning (5am-10am)
-@evening (5pm-11pm)
+- @weekend (Sat-Sun)
+- @weekday (Mon-Fr)
+- @morning (5am-10am)
+- @evening (5pm-11pm)
 
 2. In your org agenda configuration, use __org-when-skip-if__ instead of __org-agenda-skip-if__.
 e.g.
