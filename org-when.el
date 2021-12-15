@@ -90,14 +90,14 @@ END is the end of the time block as represented by decode-time e.g., 0 for Sunda
        (org-when-recursive-test org-when-list-tags alltags))
      end)))
 
-(defun org-when-skip-if (&rest conditions)
+(defun org-when-skip-entry-if (subtree conditions)
   ""
     (or
    (org-when-filter org-when-list-tags)
-   (org-agenda-skip-entry-if conditions)))
+   (org-agenda-skip-entry-if subtree conditions)))
 
 
-(defun org-when-skip-subtree-if (&rest conditions)
+(defun org-when-skip-subtree-if (conditions)
   ""
     (or
    (org-when-filter org-when-list-tags)
