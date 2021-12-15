@@ -20,7 +20,7 @@
 ;;
 ;;; Code:
 
-(defcustom org-when-list-tags
+(defcustom org-when-time-entries
   `((6  "@weekend"      6       0)
    ( 2  "@evening"      17      23 )
    ( 2  "@morning"      05      10 )
@@ -73,40 +73,43 @@ END is the end of the time block as represented by decode-time e.g., 0 for Sunda
          (cur-val (nth type (decode-time))))
       (and
        (not (and (member tag alltags)
-            (if (< start end) ; we need to flip the logic if e.g., sat-sun (6-0)
-                (and (> cur-val start) (< cur-val end)) ;less than start or greater than end
-              (or (< cur-val end) (> cur-val start))))) ; or greater than end AND less than start
-        (org-when-recursive-test (cdr when-list) alltags)))
+                 (if (< start end) ; we need to flip the logic if e.g., sat-sun (6-0)
+                     (and (> cur-val start) (< cur-val end)) ;less than start or greater than end
+                   (or (< cur-val end) (> cur-val start))))) ; or greater than end AND less than start
+       (org-when-recursive-test (cdr when-list) alltags)))
     t))
 
+
+(defun org-when-list-of-tags ()
+  "Create a list of the tags specified in org-when-time-entries."
+  (mapcar (lambda(x) (nth 1 x)) org-when-time-entries))
+
+(org-when-list-of-tags)
 
 (defun org-when-filter ( entries )
   ""
   (org-back-to-heading t)
   (let ((end (org-entry-end-position)))
     (and
-     (let ((alltags (split-string
+     (let* ((alltags (split-string
                      (or (org-entry-get (point) "ALLTAGS" t) "")
-                     ":")))
-       (org-when-recursive-test org-when-list-tags alltags))
+                     ":"))
+            (matchtags (seq-intersection (org-when-list-of-tags) alltags)))
+       (if matchtags
+           (org-when-recursive-test org-when-time-entries alltags)
+         nil))
      end)))
 
-(defun org-when-skip-entry-if (subtree conditions)
-  ""
+(defun org-when-skip-if (subtree conditions)
+  "Replacement for (org-agenda-skip-if SUBTREE CONDITIONS).
+Will do that plus filter out untimely org-when-time-entries."
     (or
-   (org-when-filter org-when-list-tags)
-   (org-agenda-skip-entry-if subtree conditions)))
-
-
-(defun org-when-skip-subtree-if (conditions)
-  ""
-    (or
-   (org-when-filter org-when-list-tags)
-   (org-agenda-skip-subtree-if conditions)))
+   (org-when-skip-filter)
+   (org-agenda-skip-if subtree conditions)))
 
 (defun org-when-skip-filter ()
   ""
-  (org-when-filter org-when-list-tags))
+  (org-when-filter org-when-time-entries))
 
 
 (provide 'org-when)

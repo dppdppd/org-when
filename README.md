@@ -1,7 +1,7 @@
 # org-when
-Filter agenda items using tags, e.g. @weekend
+Hide items that aren't time-relevant by creating and using time-based tags e.g., @weekend
  
-Agendas can get filled with tasks that can't be done in the current time context. org-when will hide tasks that aren't doable right now.
+Agendas can get filled with tasks that can't be completed in the current time context. org-when will hide tasks that aren't doable right now.
 
 For example
 
@@ -10,16 +10,13 @@ For example
 With org-when, this heading will only show up in org agenda on Saturday or Sunday.
 
 ## INSTALLATION
-Doom:
-#### packages.el
-```(package! org-when)```
 
-#### config.el
-```(use-package! org-when)```
+```(package org-when)```
+```(use-package org-when)```
 
 ## CONFIGURATION
 
-- OPTIONALLY, modify org-when-list-tags. This is a list of tags and times. It can be customized or set.
+1. OPTIONALLY, modify org-when-list-tags. This is a list of tags and times. It can be customized or set.
 The default tags (and their times) are
 
 @weekend (Sat-Sun)
@@ -27,21 +24,16 @@ The default tags (and their times) are
 @morning (5am-10am)
 @evening (5pm-11pm)
 
-- In your org agenda configuration, supply org-agenda-skip-function with org-when-skip-filter, or, if you use org-agenda-skip\*, use org-when-skip\* instead.
+2. In your org agenda configuration, use __org-when-skip-if__ instead of __org-agenda-skip-if__.
 e.g.
 
 ```
 (setq org-agenda-custom-commands
         '(("d" "Daily agenda"
-            (agenda ""
-                ((org-agenda-files (list org-directory))
-                (org-agenda-span 3)
-                (org-agenda-skip-function '(org-when-skip-if 'todo 'done)))))))
+            ((agenda ""
+                (org-agenda-skip-function '(org-when-skip-if '(todo done))))))))
 
 ```
                       
-                      
-
-                      
-- tag your headings with one of the specified tags.
+3. tag your headings with one of the specified tags.
 
