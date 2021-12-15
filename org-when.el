@@ -74,7 +74,7 @@ END is the end of the time block as represented by decode-time e.g., 0 for Sunda
       (and
        (not (and (member tag alltags)
                  (if (< start end) ; we need to flip the logic if e.g., sat-sun (6-0)
-                     (and (> cur-val start) (< cur-val end)) ;less than start or greater than end
+                     (and (>= cur-val start) (<= cur-val end)) ;less than start or greater than end
                    (or (< cur-val end) (> cur-val start))))) ; or greater than end AND less than start
        (org-when-recursive-test (cdr when-list) alltags)))
     t))
