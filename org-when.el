@@ -92,11 +92,11 @@ END is the end of the time block as represented by decode-time e.g., 0 for Sunda
   (let ((end (org-entry-end-position)))
     (and
      (let* ((alltags (split-string
-                     (or (org-entry-get (point) "ALLTAGS" t) "")
-                     ":"))
+                      (or (org-entry-get (point) "ALLTAGS" t) "")
+                      ":"))
             (matchtags (seq-intersection (org-when-list-of-tags) alltags)))
        (if matchtags
-           (org-when-recursive-test org-when-time-entries alltags)
+           (org-when-recursive-test entries alltags)
          nil))
      end)))
 
